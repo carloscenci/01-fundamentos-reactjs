@@ -1,16 +1,14 @@
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
+import { useState } from 'react'
 
 import { Avatar } from './Avatar'
 import { Comment } from './Comment'
 import styles from './Post.module.css'
 
-const comments = [
-    1,
-    2,
-]
-
 export function Post({author, content, publishedAt}) {
+    const [comments, setComments] = useState([1, 2])
+
     const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
         locale: ptBR
     })
@@ -22,7 +20,7 @@ export function Post({author, content, publishedAt}) {
 
     function handleCreateNewComment() {
         event.preventDefault()
-        comments.push(3)
+        setComments([ ...comments, comments.length + 1])
     }
 
     return (
